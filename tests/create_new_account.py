@@ -3,13 +3,16 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import configuration
+from pages import main_page
 
 driver = webdriver.Chrome()
 driver.implicitly_wait(10)
-driver.get("https://lunaonedev.firstbridge.io")
+driver.get(configuration.url)
 assert "Luna 1" in driver.title
-open_menu_btn = driver.find_element(By.XPATH, "//body/div[@id='root']/div[1]/div[1]/button[1]/span[1]")
+open_menu_btn = driver.find_element(By.XPATH, main_page.open_menu_btn)
 open_menu_btn.click()
+
 wallet_btn = driver.find_element(By.XPATH, "//body/div[2]/div[1]/div[2]/div[2]/button[1]/span[1]")
 wallet_btn.click()
 create_wallet_btn = driver.find_element(By.XPATH, "//span[contains(text(),'Create Wallet')]")
@@ -26,12 +29,17 @@ create_btn.click()
 text = driver.find_element(By.XPATH, "//div[contains(text(),'Secret Recovery Phrase')]")
 try:
     element = WebDriverWait(driver, 10).until(
-        EC.text_to_be_present_in_element((By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]"))
+        EC.presence_of_element_located((By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]"))
     )
 except:
-    print("Element of recovery Phrase wasn't found on page !!!")
+    capture_path = 'D:/Work/Screenshots from tests/Text not present.png'
+    driver.save_screenshot(capture_path)
+    print("ERROR => Element of recovery Phrase wasn't found on page !!! See screenshot")
+
 
 recovery_phrase = driver.find_element(By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]")
+
+print(recovery_phrase.get_attribute("text"))
 
 #elem.send_keys(Keys.RETURN)
 #assert "No results found." not in driver.page_source
