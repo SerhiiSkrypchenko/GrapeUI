@@ -7,6 +7,7 @@ import configuration
 from pages import main_page
 
 driver = webdriver.Chrome()
+driver.maximize_window()
 driver.implicitly_wait(10)
 driver.get(configuration.url)
 assert "Luna 1" in driver.title
@@ -38,8 +39,26 @@ except:
 
 
 recovery_phrase = driver.find_element(By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]")
+list_of_words = recovery_phrase.text.split()
 
-print(recovery_phrase.get_attribute("text"))
+next_btn = driver.find_element(By.XPATH, "//span[contains(text(),'Next')]")
+next_btn.click()
+
+for x in list_of_words:
+    word = driver.find_element(By.XPATH, "//span[contains(text(),'" + x + "')]")
+    word.click()
+
+try:
+    element = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.XPATH, "//h2[contains(text(),'Make Transfer')]"))
+    )
+except:
+    capture_path = 'D:/Work/Screenshots from tests/Make transfer money isnot present.png'
+    driver.save_screenshot(capture_path)
+    print("ERROR => Make transfer money isnot present !!! See screenshot")
+
+
+
 
 #elem.send_keys(Keys.RETURN)
 #assert "No results found." not in driver.page_source
