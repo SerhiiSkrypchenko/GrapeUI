@@ -1,15 +1,15 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import configuration
-from pages import main_page
+from page_objects import main_page
 
 driver = webdriver.Chrome()
 driver.maximize_window()
 driver.implicitly_wait(10)
 driver.get(configuration.url)
+
 assert "Luna 1" in driver.title
 open_menu_btn = driver.find_element(By.XPATH, main_page.open_menu_btn)
 open_menu_btn.click()
@@ -52,12 +52,14 @@ try:
     element = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.XPATH, "//h2[contains(text(),'Make Transfer')]"))
     )
+    assert "Make Transfer" in driver.page_source
+    assert "Wallet ID" in driver.page_source
+    assert "Available balance" in driver.page_source
+    assert "Transaction History" in driver.page_source
 except:
-    capture_path = 'D:/Work/Screenshots from tests/Make transfer money isnot present.png'
+    capture_path = 'D:/Work/Screenshots from tests/Make transfer money is not present.png'
     driver.save_screenshot(capture_path)
-    print("ERROR => Make transfer money isnot present !!! See screenshot")
-
-
+    print("ERROR => Make transfer money is not present !!! See screenshot")
 
 
 #elem.send_keys(Keys.RETURN)
