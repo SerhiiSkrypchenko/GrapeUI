@@ -9,5 +9,6 @@ stage_url = ""
 prod_url = ""
 
 
-#buttons
-open_menu_btn = "//body/div[@id='root']/div[1]/div[1]/button[1]/span[1]"
+"""buttons"""
+open_menu_btn_route = "//body/div[@id='root']/div[1]/div[1]/button[1]/span[1]"
+wallet_menu_btn_route = "//body/div[2]/div[1]/div[2]/div[2]/button[1]/span[1]"

@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import configuration
-from page_objects import main_page
+from page_objects import home_page
 
 driver = webdriver.Chrome()
 driver.maximize_window()

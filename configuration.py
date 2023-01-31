@@ -1,3 +1,3 @@
-from page_objects import main_page
+from page_objects import home_page
 
-url = main_page.dev_url
+url = home_page.dev_url
