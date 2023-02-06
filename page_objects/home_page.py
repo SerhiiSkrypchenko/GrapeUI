@@ -5,10 +5,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from seleniumbase import BaseCase
 
-dev_url = "https://lunaonedev.firstbridge.io"
-stage_url = ""
-prod_url = ""
-
 
 class HomePage(BaseCase):
     open_menu_btn_route = "//body/div[@id='root']/div[1]/div[1]/button[1]/span[1]"
