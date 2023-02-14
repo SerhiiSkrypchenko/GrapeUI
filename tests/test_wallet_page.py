@@ -1,12 +1,10 @@
 import unittest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import configuration
 from page_objects import new_wallet_page
-from page_objects.wallet_page import WalletPage
 from page_objects.new_wallet_page import NewWalletPage
+from page_objects.wallet_page import WalletPage
 
 
 class TestWalletPage(unittest.TestCase):
@@ -22,6 +20,7 @@ class TestWalletPage(unittest.TestCase):
 
         print("Step #1: Click on Open Menu button")
         driver.find_element(By.XPATH, WalletPage.open_menu_btn_route).click()
+        #BasePage.click(driver, WalletPage.open_menu_btn)
 
         print("Step #2: Click on Wallet button in menu")
         driver.find_element(By.XPATH, WalletPage.wallet_menu_btn_route).click()
