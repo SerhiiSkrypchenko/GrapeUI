@@ -8,6 +8,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from seleniumbase import BaseCase
 
 
+
+
 class NewWalletPage(BaseCase):
     create_wallet_btn = "//span[contains(text(),'Create Wallet')]"
     restore_wallet_btn = "//span[contains(text(),'Restore Wallet')]"

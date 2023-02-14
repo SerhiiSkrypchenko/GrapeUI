@@ -9,7 +9,7 @@ from page_objects.wallet_page import WalletPage
 from page_objects.new_wallet_page import NewWalletPage
 
 
-class TestHomePage(unittest.TestCase):
+class TestWalletPage(unittest.TestCase):
 
     def test_create_new_wallet(self):
         driver = webdriver.Chrome()
