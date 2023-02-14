@@ -8,8 +8,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from seleniumbase import BaseCase
 
 
-class NewWalletPage(BaseCase):
+class NewWalletPage():
     create_wallet_btn = "//span[contains(text(),'Create Wallet')]"
+    #create_wallet_btn = (By.XPATH, "//span[contains(text(),'Create Wallet')]")
     restore_wallet_btn = "//span[contains(text(),'Restore Wallet')]"
     new_password_field = "//body/div[@id='root']/div[1]/div[2]/form[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]"
     confirm_password_field = "//body/div[@id='root']/div[1]/div[2]/form[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/input[1]"
@@ -18,6 +19,10 @@ class NewWalletPage(BaseCase):
     secret_recovery_phrase = "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]"
     copy_recovery_phrase_btn = "/html/body/div/div/div[2]/div/div/div[3]/div/button"
     next_btn = "//span[contains(text(),'Next')]"
+    restore_wallet_secret_phrase = "//input[@id='passphrase']"
+    restore_wallet_next_btn = "//span[contains(text(),'Next')]"
+    restore_wallet_password_field = "input"
+    restore_wallet_submit_btn = "//span[contains(text(),'Submit')]"
 
     def fill_words_in_correct_order(self, list_of_words, driver):
         for x in list_of_words:
@@ -41,5 +46,3 @@ def verify_third_page(self, driver):
     self.assertTrue("Next" in driver.page_source)
     # assert (WebDriverWait(driver, 10).until(EC.invisibility_of_element_located((By.XPATH, NewWalletPage.copy_recovery_phrase_btn))))
     # assert (WebDriverWait(driver, 10).until(EC.invisibility_of_element_located((By.XPATH, NewWalletPage.next_btn))))
-
-

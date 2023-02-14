@@ -5,20 +5,17 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from seleniumbase import BaseCase
 
-dev_url = "https://lunaonedev.firstbridge.io"
-stage_url = ""
-prod_url = ""
 
-
-class HomePage(BaseCase):
+class WalletPage(BaseCase):
     open_menu_btn_route = "//body/div[@id='root']/div[1]/div[1]/button[1]/span[1]"
+    #open_menu_btn = By.XPATH, "//body/div[@id='root']/div[1]/div[1]/button[1]/span[1]"
     wallet_menu_btn_route = "//body/div[2]/div[1]/div[2]/div[2]/button[1]/span[1]"
     make_transfer_text = "//h2[contains(text(),'Make Transfer')]"
 
-    def verify_home_page(self, driver):
+    def verify_wallet_page(self, driver):
         try:
             WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.XPATH, HomePage.make_transfer_text))
+                EC.presence_of_element_located((By.XPATH, WalletPage.make_transfer_text))
             )
             self.assertTrue("Make Transfer" in driver.page_source)
             self.assertTrue("Wallet ID" in driver.page_source)
