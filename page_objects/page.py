@@ -46,10 +46,18 @@ class WalletPage(BasePage):
     def input_password_in_new_password_field(self, password):
         self.enter_text(NewWalletPageLocators.new_password_field, password)
 
+    # input password into Confirm Password field during creating new wallet flow
+    def input_password_in_confirm_password_field(self, password):
+        self.enter_text(NewWalletPageLocators.confirm_password_field, password)
+
+    def click_create_btn(self):
+        self.click(NewWalletPageLocators.create_btn)
+
     def is_title_matches(self):
         """Verifies that the hardcoded text "Python" appears in page title"""
 
         return "Luna 1" in self.driver.title
+
     def verify_wallet_page(self, driver):
         try:
             WebDriverWait(driver, 10).until(

@@ -36,13 +36,12 @@ class TestWalletPage(unittest.TestCase):
         print("Step #4: Input password into New Password")
         wallet_page.input_password_in_new_password_field(configuration.address_password)
 
-        """print("Step #5: Input password into Confirm password field")
-        driver.find_element(By.XPATH, NewWalletPage.confirm_password_field).clear()
-        driver.find_element(By.XPATH, NewWalletPage.confirm_password_field).send_keys(configuration.address_password)
+        print("Step #5: Input password into Confirm password field")
+        wallet_page.input_password_in_confirm_password_field(configuration.address_password)
 
         print("Step #6: Click on Create button")
-        driver.find_element(By.XPATH, NewWalletPage.create_btn).click()
-
+        wallet_page.click_create_btn()
+        """
         # verify third step page of create new wallet flow
         # new_wallet_page.verify_third_page(self, driver)
 
