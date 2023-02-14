@@ -8,6 +8,7 @@ from seleniumbase import BaseCase
 
 class WalletPage(BaseCase):
     open_menu_btn_route = "//body/div[@id='root']/div[1]/div[1]/button[1]/span[1]"
+    #open_menu_btn = By.XPATH, "//body/div[@id='root']/div[1]/div[1]/button[1]/span[1]"
     wallet_menu_btn_route = "//body/div[2]/div[1]/div[2]/div[2]/button[1]/span[1]"
     make_transfer_text = "//h2[contains(text(),'Make Transfer')]"
 
