@@ -1,3 +1,4 @@
+import pyperclip
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from resources.locators import WalletPageLocators, NewWalletPageLocators
@@ -17,7 +18,8 @@ class BasePage(object):
 
     def enter_text(self, by_locator, text):
         """ Performs text entry of the passed in text, in a web element whose locator is passed to it"""
-        return WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(by_locator)).send_keys(text)
+        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(by_locator)).clear()
+        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(by_locator)).send_keys(text)
 
     def get_title(self, title) -> str:
         """Returns the title of the page"""
@@ -31,13 +33,17 @@ class WalletPage(BasePage):
     not be easy to understand.
     """
 
+    """Open Menu"""
+
     def open_menu(self):
         self.click(WalletPageLocators.menu_btn)
 
-    def click_wallet_section_menu(self):
+    """Click on Wallet section in MENU"""
+
+    def click_wallet_section_in_menu(self):
         self.click(WalletPageLocators.wallet_menu_btn)
 
-    print("Click on Create wallet button during creating new wallet flow")
+    """Click on Create wallet button during Creating New Wallet flow"""
 
     def click_create_wallet(self):
         self.click(NewWalletPageLocators.create_wallet_btn)
@@ -46,35 +52,46 @@ class WalletPage(BasePage):
     def input_password_in_new_password_field(self, password):
         self.enter_text(NewWalletPageLocators.new_password_field, password)
 
-    # input password into Confirm Password field during creating new wallet flow
+    # Input password into Confirm Password field during creating new wallet flow
     def input_password_in_confirm_password_field(self, password):
         self.enter_text(NewWalletPageLocators.confirm_password_field, password)
+
+    """Click on CREATE btn during creating wallet flow on STEP #2 (PASSWORD)"""
 
     def click_create_btn(self):
         self.click(NewWalletPageLocators.create_btn)
 
+    # Copy Secret Recovery Phrase on Step #3 during creation new wallet
+    def copy_secret_recovery_phrase_step_3(self):
+        self.click(NewWalletPageLocators.copy_recovery_phrase_btn_step_3)
+        list_of_words = pyperclip.paste()
+        correct_list_of_words = list_of_words.split()
+        return correct_list_of_words
+
+    # Click on NEXT btn on Step #3 during creation new wallet
+    def click_next_btn_step_3(self):
+        self.click(NewWalletPageLocators.next_btn_step_3)
+
     def is_title_matches(self):
-        """Verifies that the hardcoded text "Python" appears in page title"""
+        """Verifies that the hardcoded text "Luna 1" appears in page title"""
 
         return "Luna 1" in self.driver.title
 
-    def verify_wallet_page(self, driver):
+    def verify_wallet_page(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(WalletPageLocators.make_transfer_text))
         try:
-            WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.XPATH, WalletPageLocators.make_transfer_text))
-            )
-            assert ("Make Transfer" in driver.page_source)
-            assert ("Wallet ID" in driver.page_source)
-            assert ("Available balance" in driver.page_source)
-            assert ("Transaction History" in driver.page_source)
+            assert "Make Transfer" in self.driver.page_source
+            assert "Available balance" in self.driver.page_source
+            assert "Transaction History" in self.driver.page_source
+            return True
         except:
-            capture_path = 'D:/Work/Screenshots from tests/Make transfer money is not present.png'
-            driver.save_screenshot(capture_path)
-            print("ERROR => Make transfer money is not present !!! See screenshot")
+            return False
 
-    def fill_words_in_correct_order(self, list_of_words, driver):
-        for x in list_of_words:
-            driver.find_element(By.XPATH, "//span[contains(text(),'" + x + "')]").click()
+    def fill_words_in_correct_order(self, list_of_words):
+        for word in list_of_words:
+            by_locator = (By.XPATH, "//span[contains(text(),'" + word + "')]")
+            self.click(by_locator)
 
     def verify_first_page(self, driver):
         assert ("Create Wallet" in driver.page_source)
