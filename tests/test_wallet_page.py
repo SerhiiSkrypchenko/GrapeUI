@@ -1,6 +1,5 @@
 import unittest
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 import configuration
 from page_objects.page import WalletPage
 from page_objects import page
@@ -17,7 +16,6 @@ class TestWalletPage(unittest.TestCase):
     def test_create_new_wallet(self):
         wallet_page = page.WalletPage(self.driver)
 
-
         # assert Title is correct
         self.assertTrue(wallet_page.is_title_matches(), "Luna 1 title doesn't match.")
 
@@ -25,7 +23,7 @@ class TestWalletPage(unittest.TestCase):
         wallet_page.open_menu()
 
         print("Step #2: Click on Wallet button in menu")
-        wallet_page.click_wallet_section_menu()
+        wallet_page.click_wallet_section_in_menu()
 
         """verify first step page of create new wallet flow"""
         # home_page.verify_wallet_page(home_page)
@@ -41,23 +39,24 @@ class TestWalletPage(unittest.TestCase):
 
         print("Step #6: Click on Create button")
         wallet_page.click_create_btn()
-        """
+
         # verify third step page of create new wallet flow
         # new_wallet_page.verify_third_page(self, driver)
 
         print("Step #7: Copy recovery phrase into list")
-        list_of_words = driver.find_element(By.XPATH, NewWalletPage.secret_recovery_phrase).text.split()
+        list_of_words = wallet_page.copy_secret_recovery_phrase_step_3()
 
         print("Step #8: Click on NEXT button")
-        driver.find_element(By.XPATH, NewWalletPage.next_btn).click()"""
+        wallet_page.click_next_btn_step_3()
 
         print("Step #9: Fill words in correct order")
-        # NewWalletPage.fill_words_in_correct_order(self, list_of_words, driver)
+        wallet_page.fill_words_in_correct_order(list_of_words)
 
         print("Step #10: Verify home page of wallet")
-        # WalletPage.verify_wallet_page(self, driver)
+        self.assertTrue(wallet_page.verify_wallet_page(), "Required Texts on Wallet Page are not present on Wallet Page")
 
-    """def test_import_wallet(self):
+    """
+    def test_import_wallet(self):
         driver = self.driver
 
         # assert title
