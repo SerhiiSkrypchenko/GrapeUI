@@ -33,7 +33,8 @@ class TestWalletPage(unittest.TestCase):
         wallet_page.input_password_and_click_create_btn(configuration.address_password)
 
         print("verify third step page of create new wallet flow")
-        self.assertTrue(wallet_page.verify_third_step_of_new_wallet_creation(), "Required data isn't present on third step of creating new wallet")
+        self.assertTrue(wallet_page.verify_third_step_of_new_wallet_creation(), "Required data isn't present on third "
+                                                                                "step of creating new wallet")
 
         print("Step #7: Copy recovery phrase into list")
         list_of_words = wallet_page.copy_secret_recovery_phrase_step_3()
@@ -45,50 +46,41 @@ class TestWalletPage(unittest.TestCase):
         wallet_page.fill_words_in_correct_order(list_of_words)
 
         print("Step #10: Verify home page of wallet")
-        self.assertTrue(wallet_page.verify_wallet_main_page(), "Required Texts on Wallet Page are not present on Wallet Page")
+        self.assertTrue(wallet_page.verify_wallet_main_page(), "Required Texts on Wallet Page are not present on "
+                                                               "Wallet Page")
 
-    """
     def test_import_wallet(self):
-        driver = self.driver
+        wallet_page = WalletPage(self.driver)
 
-        # assert title
-        self.assertTrue("Luna 1" in driver.title)
+        print("assert Title of Luna 1")
+        self.assertTrue(wallet_page.is_title_matches(), "Title isn't correct")
 
         print("Step #1: Click on Open Menu button")
-        driver.find_element(By.XPATH, WalletPage.open_menu_btn_route).click()
+        wallet_page.open_menu()
 
         print("Step #2: Click on Wallet button in menu")
-        driver.find_element(By.XPATH, WalletPage.wallet_menu_btn_route).click()
+        wallet_page.click_wallet_section_in_menu()
 
-        # verify first step page of create new wallet flow
-        new_wallet_page.verify_first_page(self, driver)
+        print("verify first step page of create new wallet flow")
+        self.assertTrue(wallet_page.verify_first_step_of_wallet_creation(), "Missing data on first step of creation "
+                                                                            "wallet flow")
 
-        print("Step #3: Click on Restore Wallet btn")
-        driver.find_element(By.XPATH, NewWalletPage.restore_wallet_btn).click()
+        print("Step #3: Click on Restore Wallet btn on first step")
+        wallet_page.click_restore_wallet_btn()
 
-        # verify pop-up Restore Wallet window
+        # print("verify pop-up Restore Wallet window")
 
         print("Step #4: Input Secret Phrase into field and click Next btn")
-        driver.find_element(By.XPATH, NewWalletPage.restore_wallet_secret_phrase).clear()
-        driver.find_element(By.XPATH, NewWalletPage.restore_wallet_secret_phrase).send_keys(
-            configuration.recovery_secret_phrase)
-
-        print("Step #5: Click Next btn")
-        driver.find_element(By.XPATH, NewWalletPage.restore_wallet_next_btn).click()
+        wallet_page.input_recovery_phrase_and_click_next_btn(configuration.recovery_secret_phrase)
 
         print("Step #6: Set password to encrypt your wallet")
-        driver.find_element(By.TAG_NAME, NewWalletPage.restore_wallet_password_field).clear()
-        driver.find_element(By.TAG_NAME, NewWalletPage.restore_wallet_password_field).send_keys(
-            configuration.address_password)
-
-        print("Step #7: Click Submit btn")
-        driver.find_element(By.XPATH, NewWalletPage.restore_wallet_submit_btn).click()
+        wallet_page.input_password_and_click_submit_btn(configuration.address_password)
 
         print("Step #8: Verify home page of wallet")
-        WalletPage.verify_wallet_page(self, driver)
+        self.assertTrue(wallet_page.verify_wallet_main_page(), "Main wallet page is different")
 
         print("Step #9: Verify correct WalletID")
-        self.assertTrue(configuration.address in driver.page_source)"""
+        self.assertTrue(configuration.address in self.driver.page_source)
 
     def tearDown(self):
         self.driver.close()

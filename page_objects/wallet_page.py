@@ -11,10 +11,12 @@ class WalletPage(BasePage):
     """
 
     """Open Menu"""
+
     def open_menu(self):
         self.click(WalletPageLocators.menu_btn)
 
     """Click on Wallet section in MENU"""
+
     def click_wallet_section_in_menu(self):
         self.click(WalletPageLocators.wallet_menu_btn)
 
@@ -22,23 +24,23 @@ class WalletPage(BasePage):
     def click_create_wallet(self):
         self.click(NewWalletPageLocators.create_wallet_btn)
 
-    # Input password into New Password field during creating new wallet flow
-    def input_password_in_new_password_field(self, password):
-        self.enter_text(NewWalletPageLocators.new_password_field, password)
-
-    # Input password into Confirm Password field during creating new wallet flow
-    def input_password_in_confirm_password_field(self, password):
-        self.enter_text(NewWalletPageLocators.confirm_password_field, password)
-
-    """Click on CREATE btn during creating wallet flow on STEP #2 (PASSWORD)"""
-    def click_create_btn(self):
-        self.click(NewWalletPageLocators.create_btn)
+    def click_restore_wallet_btn(self):
+        self.click(NewWalletPageLocators.restore_wallet_btn)
 
     # Input password in fields and click on Create btn during wallet creation flow
     def input_password_and_click_create_btn(self, password):
         self.enter_text(NewWalletPageLocators.new_password_field, password)
         self.enter_text(NewWalletPageLocators.confirm_password_field, password)
         self.click(NewWalletPageLocators.create_btn)
+
+    # Input secret recovery phrase and click NEXT btn during Recovery wallet proccess STEP #1 (pop-up window)
+    def input_recovery_phrase_and_click_next_btn(self, secret_phrase):
+        self.enter_text(NewWalletPageLocators.restore_wallet_secret_phrase, secret_phrase)
+        self.click(NewWalletPageLocators.restore_wallet_next_btn)
+
+    def input_password_and_click_submit_btn(self, password):
+        self.enter_text(NewWalletPageLocators.restore_wallet_password_field, password)
+        self.click(NewWalletPageLocators.restore_wallet_submit_btn)
 
     # Copy Secret Recovery Phrase on Step #3 during creation new wallet
     def copy_secret_recovery_phrase_step_3(self):
