@@ -24,6 +24,10 @@ class HeaderLocators(object):
     export_account_btn = (By.XPATH, "//span[contains(text(),'Export')]")
     lock_wallet_btn = (By.XPATH, "//span[contains(text(),'Lock Wallet')]")
 
+    # lock and unlock wallet elements
+    lock_input_field = (By.TAG_NAME, "input")
+    unlock_wallet_btn = (By.XPATH, "//span[contains(text(),'Unlock')]")
+
     # header elements:
     copy_account_address_btn = (By.XPATH, "//body/div[@id='root']/div[1]/div[1]/div[2]/div[1]/div[1]/button[1]/i[1]")
     select_environment_btn = (By.XPATH, "//body/div[@id='root']/div[1]/div[1]/div[2]/div[2]/button[2]/span[1]")
