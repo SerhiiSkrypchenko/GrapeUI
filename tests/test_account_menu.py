@@ -4,7 +4,7 @@ import configuration
 from page_objects.wallet_page import WalletPage
 
 
-class TestWalletPage(unittest.TestCase):
+class TestCreateRestoreWallet(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
         self.driver.maximize_window()
@@ -17,10 +17,13 @@ class TestWalletPage(unittest.TestCase):
         print("verify Title is correct")
         self.assertTrue(wallet_page.is_title_matches(), "Luna 1 title doesn't match.")
 
-        print("Step #1: Click on Open Menu button")
+        print("Step #1: Open MENU")
         wallet_page.open_menu()
 
-        print("Step #2: Click on Wallet button in menu")
+        print("verify menu sections are present")
+        self.assertTrue(wallet_page.verify_menu(), "Not all menu sections are present")
+
+        print("STep #2: Select Wallet section in Menu")
         wallet_page.click_wallet_section_in_menu()
 
         print("verify first step page of create new wallet flow")
@@ -49,7 +52,7 @@ class TestWalletPage(unittest.TestCase):
         self.assertTrue(wallet_page.verify_wallet_main_page(), "Required Texts on Wallet Page are not present on "
                                                                "Wallet Page")
 
-    def test_import_wallet(self):
+    def test_restore_wallet(self):
         wallet_page = WalletPage(self.driver)
 
         print("assert Title of Luna 1")
