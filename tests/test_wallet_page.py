@@ -80,7 +80,7 @@ class TestWalletPage(unittest.TestCase):
         self.assertTrue(wallet_page.verify_wallet_main_page(), "Main wallet page is different")
 
         print("Step #9: Verify correct WalletID")
-        self.assertTrue(configuration.address in self.driver.page_source)
+        self.assertTrue(configuration.address in self.driver.page_source, "Address of imported wallet is incorrect")
 
     def tearDown(self):
         self.driver.close()
