@@ -9,13 +9,13 @@ class WalletPageLocators(object):
 
 class NewWalletPageLocators(object):
     create_wallet_btn = (By.XPATH, "//span[contains(text(),'Create Wallet')]")
-    restore_wallet_btn = "//span[contains(text(),'Restore Wallet')]"
+    restore_wallet_btn = (By.XPATH, "//span[contains(text(),'Restore Wallet')]")
     new_password_field = (By.XPATH, "//body/div[@id='root']/div[1]/div[2]/form[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]")
     confirm_password_field = (By.XPATH, "//body/div[@id='root']/div[1]/div[2]/form[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/input[1]")
     # CREATE btn on Step #2 during creation wallet flow
     create_btn = (By.XPATH, "//span[contains(text(),'Create')]")
     # Secret Recovery text during on Step #3
-    secret_recovery_phrase_text = "//div[contains(text(),'Secret Recovery Phrase')]"
+    secret_recovery_phrase_text = (By.XPATH, "//div[contains(text(),'Secret Recovery Phrase')]")
     # Secret Recovery phrase (list of words)
     secret_recovery_phrase = (By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]")
     # Copy recovery phrase on Step #3

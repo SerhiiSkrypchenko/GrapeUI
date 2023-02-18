@@ -1,9 +1,7 @@
 import unittest
 from selenium import webdriver
 import configuration
-from page_objects.page import WalletPage
-from page_objects import page
-from resources.locators import NewWalletPageLocators
+from page_objects.wallet_page import WalletPage
 
 
 class TestWalletPage(unittest.TestCase):
@@ -14,9 +12,9 @@ class TestWalletPage(unittest.TestCase):
         self.driver.get(configuration.url)
 
     def test_create_new_wallet(self):
-        wallet_page = page.WalletPage(self.driver)
+        wallet_page = WalletPage(self.driver)
 
-        # assert Title is correct
+        print("verify Title is correct")
         self.assertTrue(wallet_page.is_title_matches(), "Luna 1 title doesn't match.")
 
         print("Step #1: Click on Open Menu button")
@@ -25,23 +23,17 @@ class TestWalletPage(unittest.TestCase):
         print("Step #2: Click on Wallet button in menu")
         wallet_page.click_wallet_section_in_menu()
 
-        """verify first step page of create new wallet flow"""
-        # home_page.verify_wallet_page(home_page)
+        print("verify first step page of create new wallet flow")
+        wallet_page.verify_first_step_of_wallet_creation()
 
         print("Step #3: Click on Create wallet button")
         wallet_page.click_create_wallet()
 
-        print("Step #4: Input password into New Password")
-        wallet_page.input_password_in_new_password_field(configuration.address_password)
+        print("Step #4: Input password, confirm password and click Create btn")
+        wallet_page.input_password_and_click_create_btn(configuration.address_password)
 
-        print("Step #5: Input password into Confirm password field")
-        wallet_page.input_password_in_confirm_password_field(configuration.address_password)
-
-        print("Step #6: Click on Create button")
-        wallet_page.click_create_btn()
-
-        # verify third step page of create new wallet flow
-        # new_wallet_page.verify_third_page(self, driver)
+        print("verify third step page of create new wallet flow")
+        self.assertTrue(wallet_page.verify_third_step_of_new_wallet_creation(), "Required data isn't present on third step of creating new wallet")
 
         print("Step #7: Copy recovery phrase into list")
         list_of_words = wallet_page.copy_secret_recovery_phrase_step_3()
@@ -53,7 +45,7 @@ class TestWalletPage(unittest.TestCase):
         wallet_page.fill_words_in_correct_order(list_of_words)
 
         print("Step #10: Verify home page of wallet")
-        self.assertTrue(wallet_page.verify_wallet_page(), "Required Texts on Wallet Page are not present on Wallet Page")
+        self.assertTrue(wallet_page.verify_wallet_main_page(), "Required Texts on Wallet Page are not present on Wallet Page")
 
     """
     def test_import_wallet(self):
