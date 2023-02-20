@@ -25,7 +25,7 @@ class TestCreateRestoreWallet:
         # verify Title is correct
         assert wallet_page.is_title_matches(), "Title isn't correct"
 
-        # Step #1: Open MENU"
+        # Step #1: Open MENU
         wallet_page.open_menu()
 
         # verify menu sections are present

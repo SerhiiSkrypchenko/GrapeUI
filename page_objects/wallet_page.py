@@ -1,4 +1,6 @@
 import pyperclip
+from qaseio.pytest import qase
+
 from resources.locators import HeaderLocators, CreateRestoreWalletLocators
 from selenium.webdriver.common.by import By
 from page_objects.base_page import BasePage
@@ -11,7 +13,7 @@ class WalletPage(BasePage):
     """
 
     """Open Menu"""
-
+    @qase.step("Open Menu")
     def open_menu(self):
         self.click(HeaderLocators.menu_btn)
 
@@ -64,6 +66,7 @@ class WalletPage(BasePage):
     def click_next_btn_step_3(self):
         self.click(CreateRestoreWalletLocators.next_step_3_btn)
 
+    @qase.step("Verifies that the hardcoded text Luna 1 appears in page title")
     def is_title_matches(self):
         """Verifies that the hardcoded text "Luna 1" appears in page title"""
 
