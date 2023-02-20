@@ -18,6 +18,8 @@ class TestAccountMenu:
         driver.quit()
 
     @qase.id(17)
+    @qase.title("Lock Wallet")
+    @qase.description("Lock wallet")
     def test_lock_wallet(self, set_up):
         wallet_page = WalletPage(set_up)
         header = Header(set_up)
@@ -61,6 +63,8 @@ class TestAccountMenu:
         assert header.verify_lock_wallet_page(), "Unlock btn isn't present on page"
 
     @qase.id(18)
+    @qase.title("Unlock Wallet")
+    @qase.description("Unlock wallet")
     def test_unlock_lock_wallet(self, set_up):
         wallet_page = WalletPage(set_up)
         header = Header(set_up)
