@@ -10,3 +10,5 @@ recovery_secret_phrase = "attend uphold forest cover dismiss slot future live in
 address = "0xf869a7cf9eb1703d9d716762271044f5b2b593da"
 
 address_password = "12345678"
+
+api_token = "f696cb5667b85d5f0cf4e941ecda5a1634a1ce5942a93d7ad15e01d1e0047009"

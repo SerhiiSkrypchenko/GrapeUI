@@ -1,5 +1,5 @@
-import unittest
 import pytest
+from qaseio.pytest import qase
 from selenium import webdriver
 import configuration
 from page_objects.wallet_page import WalletPage
@@ -17,6 +17,7 @@ class TestAccountMenu:
         yield driver
         driver.quit()
 
+    @qase.id(17)
     def test_lock_wallet(self, set_up):
         wallet_page = WalletPage(set_up)
         header = Header(set_up)
@@ -59,6 +60,7 @@ class TestAccountMenu:
         # Step 12: Verify wallet is locked
         assert header.verify_lock_wallet_page(), "Unlock btn isn't present on page"
 
+    @qase.id(18)
     def test_unlock_lock_wallet(self, set_up):
         wallet_page = WalletPage(set_up)
         header = Header(set_up)
