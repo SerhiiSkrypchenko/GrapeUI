@@ -3,19 +3,25 @@ from selenium import webdriver
 import configuration
 from page_objects.wallet_page import WalletPage
 from page_objects.header import Header
+from chromedriver_py import binary_path  # this will get you the path variable
+
+
+# deprecated but works in older selenium versions
+# driver = webdriver.Chrome(executable_path=binary_path)
 
 
 class Test:
     @pytest.fixture
     def set_up(self):
         driver = webdriver.Chrome()
+        print(" PATH = " + binary_path)
         driver.maximize_window()
         driver.implicitly_wait(10)
         driver.get(configuration.url)
         yield driver
         driver.quit()
 
-    def test_pytest(self, set_up):
+    def test_login(self, set_up):
         wallet_page = WalletPage(set_up)
         header = Header(set_up)
 
