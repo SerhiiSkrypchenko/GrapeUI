@@ -2,92 +2,92 @@ import unittest
 from selenium import webdriver
 import configuration
 from page_objects.wallet_page import WalletPage
+import pytest
+from webdriver_manager.chrome import ChromeDriverManager
 
 
-class TestCreateRestoreWallet(unittest.TestCase):
-    def setUp(self):
-        self.driver = webdriver.Chrome()
-        self.driver.maximize_window()
-        self.driver.implicitly_wait(10)
-        self.driver.get(configuration.url)
+class TestCreateRestoreWallet:
+    @pytest.fixture
+    def set_up(self):
+        driver = webdriver.Chrome(ChromeDriverManager().install())
+        driver.maximize_window()
+        driver.implicitly_wait(10)
+        driver.get(configuration.url)
+        yield driver
+        driver.quit()
 
-    def test_create_new_wallet(self):
-        wallet_page = WalletPage(self.driver)
+    def test_create_new_wallet(self, set_up):
+        wallet_page = WalletPage(set_up)
 
-        print("verify Title is correct")
-        self.assertTrue(wallet_page.is_title_matches(), "Luna 1 title doesn't match.")
+        # verify Title is correct
+        assert wallet_page.is_title_matches(), "Title isn't correct"
 
-        print("Step #1: Open MENU")
+        # Step #1: Open MENU"
         wallet_page.open_menu()
 
-        print("verify menu sections are present")
-        self.assertTrue(wallet_page.verify_menu(), "Not all menu sections are present")
+        # verify menu sections are present
+        assert wallet_page.verify_menu(), "Not all menu sections are present"
 
-        print("STep #2: Select Wallet section in Menu")
+        # STep #2: Select Wallet section in Menu
         wallet_page.click_wallet_section_in_menu()
 
-        print("verify first step page of create new wallet flow")
-        wallet_page.verify_first_step_of_wallet_creation()
+        # verify first step page of create new wallet flow
+        assert wallet_page.verify_first_step_of_wallet_creation(), "First Step Page of creating wallet is incorrect"
 
-        print("Step #3: Click on Create wallet button")
+        # Step #3: Click on Create wallet button
         wallet_page.click_create_wallet()
 
-        print("Step #4: Input password, confirm password and click Create btn")
+        # Step #4: Input password, confirm password and click Create btn
         wallet_page.input_password_and_click_create_btn(configuration.address_password)
 
-        print("verify third step page of create new wallet flow")
-        self.assertTrue(wallet_page.verify_third_step_of_new_wallet_creation(), "Required data isn't present on third "
-                                                                                "step of creating new wallet")
+        # verify third step page of create new wallet flow
+        assert wallet_page.verify_third_step_of_new_wallet_creation(), "Required data isn't present on third step of " \
+                                                                       "creating new wallet"
 
-        print("Step #7: Copy recovery phrase into list")
+        # Step #5: Copy recovery phrase
         list_of_words = wallet_page.copy_secret_recovery_phrase_step_3()
 
-        print("Step #8: Click on NEXT button")
+        # Step #6: Click on NEXT button
         wallet_page.click_next_btn_step_3()
 
-        print("Step #9: Fill words in correct order")
+        # Step #7: Fill words in correct order
         wallet_page.fill_words_in_correct_order(list_of_words)
 
-        print("Step #10: Verify home page of wallet")
-        self.assertTrue(wallet_page.verify_wallet_main_page(), "Required Texts on Wallet Page are not present on "
-                                                               "Wallet Page")
+        # Verify home page of wallet
+        assert wallet_page.verify_wallet_main_page(), "Required Texts on Wallet Page are not present on Wallet Page"
 
-    def test_restore_wallet(self):
-        wallet_page = WalletPage(self.driver)
+    def test_restore_wallet(self, set_up):
+        wallet_page = WalletPage(set_up)
 
-        print("assert Title of Luna 1")
-        self.assertTrue(wallet_page.is_title_matches(), "Title isn't correct")
+        # assert Title of Luna 1
+        assert wallet_page.is_title_matches(), "Title isn't correct"
 
-        print("Step #1: Click on Open Menu button")
+        # Step #1: Click on Open Menu button
         wallet_page.open_menu()
 
-        print("Step #2: Click on Wallet button in menu")
+        # Step #2: Click on Wallet button in menu
         wallet_page.click_wallet_section_in_menu()
 
-        print("verify first step page of create new wallet flow")
-        self.assertTrue(wallet_page.verify_first_step_of_wallet_creation(), "Missing data on first step of creation "
-                                                                            "wallet flow")
+        # verify first step page of create new wallet flow
+        assert wallet_page.verify_first_step_of_wallet_creation(), "Missing data on first step of creation wallet flow"
 
-        print("Step #3: Click on Restore Wallet btn on first step")
+        # Step #3: Click on Restore Wallet btn on first step
         wallet_page.click_restore_wallet_btn()
 
-        # print("verify pop-up Restore Wallet window")
+        """should be added Verify pop-up Restore Wallet window"""
 
-        print("Step #4: Input Secret Phrase into field and click Next btn")
+        # Step #4: Input Secret Phrase into field and click Next btn
         wallet_page.input_recovery_phrase_and_click_next_btn(configuration.recovery_secret_phrase)
 
-        print("Step #6: Set password to encrypt your wallet")
+        # Step #5: Set password to encrypt your wallet
         wallet_page.input_password_and_click_submit_btn(configuration.address_password)
 
-        print("Step #8: Verify home page of wallet")
-        self.assertTrue(wallet_page.verify_wallet_main_page(), "Main wallet page is different")
+        # Step #6: Verify home page of wallet
+        assert wallet_page.verify_wallet_main_page(), "Main wallet page is different"
 
-        print("Step #9: Verify correct WalletID")
-        self.assertTrue(configuration.address in self.driver.page_source, "Address of imported wallet is incorrect")
-
-    def tearDown(self):
-        self.driver.close()
+        # Step #7: Verify correct WalletID
+        assert configuration.address in wallet_page.driver.page_source, "Address of imported wallet is incorrect"
 
 
 if __name__ == "__main__":
-    unittest.main()
+    pytest.main()
