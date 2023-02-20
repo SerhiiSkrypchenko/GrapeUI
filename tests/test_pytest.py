@@ -1,5 +1,3 @@
-import unittest
-from time import sleep
 import pytest
 from selenium import webdriver
 import configuration
