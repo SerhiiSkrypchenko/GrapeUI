@@ -12,8 +12,6 @@ class WalletPage(BasePage):
     not be easy to understand.
     """
 
-    """Open Menu"""
-
     @qase.step("Open Menu")
     def open_menu(self):
         self.click(HeaderLocators.menu_btn)
@@ -54,7 +52,7 @@ class WalletPage(BasePage):
     @qase.step("Input password and click submit btn")
     def input_password_and_click_submit_btn(self, password):
         self.enter_text(CreateRestoreWalletLocators.restore_wallet_password_input_field, password)
-        self.click(CreateRestoreWalletLocators.restore_wallet_submit_btn)
+        self.click(CreateRestoreWalletLocators.general_submit_btn)
 
     @qase.step("Copy Secret Recovery Phrase on Step #3 during creation new wallet")
     def copy_secret_recovery_phrase_step_3(self):
