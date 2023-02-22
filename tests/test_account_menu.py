@@ -1,3 +1,5 @@
+from time import sleep
+
 import pytest
 from qaseio.pytest import qase
 from selenium import webdriver
