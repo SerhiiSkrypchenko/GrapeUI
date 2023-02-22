@@ -1,5 +1,3 @@
-from time import sleep
-
 import pytest
 from qaseio.pytest import qase
 from selenium import webdriver
@@ -7,7 +5,6 @@ import configuration
 from page_objects.wallet_page import WalletPage
 from page_objects.header import Header
 from webdriver_manager.chrome import ChromeDriverManager
-import page_objects
 
 
 class TestAccountMenu:
