@@ -69,7 +69,7 @@ class WalletPage(BasePage):
     def is_title_matches(self):
         """Verifies that the hardcoded text "Luna 1" appears in page title"""
 
-        return "Luna 1" in self.driver.title
+        return "Grape Wallet" in self.driver.title
 
     @qase.step("Verify wallet main page")
     def verify_wallet_main_page(self):

@@ -17,6 +17,7 @@ class TestAccountMenu:
         driver.implicitly_wait(10)
         driver.get(configuration.url)
 
+
         yield driver
 
         driver.quit()
