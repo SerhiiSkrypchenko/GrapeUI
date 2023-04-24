@@ -1,4 +1,4 @@
-import unittest
+from qaseio.pytest import qase
 from selenium import webdriver
 import configuration
 from page_objects.wallet_page import WalletPage
@@ -16,13 +16,16 @@ class TestCreateRestoreWallet:
         yield driver
         driver.quit()
 
+    @qase.id(2)
+    @qase.title("Create New Wallet")
+    @qase.description("Create new wallet")
     def test_create_new_wallet(self, set_up):
         wallet_page = WalletPage(set_up)
 
         # verify Title is correct
         assert wallet_page.is_title_matches(), "Title isn't correct"
 
-        # Step #1: Open MENU"
+        # Step #1: Open MENU
         wallet_page.open_menu()
 
         # verify menu sections are present
@@ -56,6 +59,9 @@ class TestCreateRestoreWallet:
         # Verify home page of wallet
         assert wallet_page.verify_wallet_main_page(), "Required Texts on Wallet Page are not present on Wallet Page"
 
+    @qase.id(3)
+    @qase.title("Restore Wallet")
+    @qase.description("Restore Wallet")
     def test_restore_wallet(self, set_up):
         wallet_page = WalletPage(set_up)
 

@@ -4,6 +4,8 @@ from selenium.webdriver.common.by import By
 class HeaderLocators(object):
     # Dashboard elements:
     make_transfer_text = (By.XPATH, "//h2[contains(text(),'Make Transfer')]")
+    address_text = (By.XPATH, "//body[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div["
+                              "1]/div[1]/div[1]/p[1]")
 
     # menu elements:
     wallet_menu_btn = (By.XPATH, "//body/div[2]/div[1]/div[2]/div[2]/button[1]/span[1]")
@@ -23,6 +25,7 @@ class HeaderLocators(object):
     import_account_btn = (By.XPATH, "//span[contains(text(),'Import')]")
     export_account_btn = (By.XPATH, "//span[contains(text(),'Export')]")
     lock_wallet_btn = (By.XPATH, "//span[contains(text(),'Lock Wallet')]")
+    account_2_name_text = (By.XPATH, "//span[contains(text(),'Account 2')]")
 
     # lock and unlock wallet elements
     lock_input_field = (By.TAG_NAME, "input")
@@ -57,4 +60,4 @@ class CreateRestoreWalletLocators(object):
     restore_wallet_secret_phrase_input_field = (By.XPATH, "//input[@id='passphrase']")
     restore_wallet_next_btn = (By.XPATH, "//span[contains(text(),'Next')]")
     restore_wallet_password_input_field = (By.TAG_NAME, "input")
-    restore_wallet_submit_btn = (By.XPATH, "//span[contains(text(),'Submit')]")
+    general_submit_btn = (By.XPATH, "//span[contains(text(),'Submit')]")
