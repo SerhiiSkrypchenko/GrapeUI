@@ -1,6 +1,6 @@
 
 localhost = "https://localhost:3000"
-dev_url = "https://lunaonedev.firstbridge.io"
+dev_url = "https://wallet.test.grap3.com"
 stage_url = ""
 prod_url = ""
 
