@@ -9,6 +9,7 @@ class BasePage(object):
     def __init__(self, driver):
         self.driver = driver
 
+
     def click(self, by_locator):
         """ Performs click on web element whose locator is passed to it"""
         WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(by_locator)).click()
