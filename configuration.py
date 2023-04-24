@@ -1,7 +1,7 @@
 
 localhost = "https://localhost:3000"
 dev_url = "https://wallet.test.grap3.com"
-stage_url = ""
+stage_url = "https://wallet.grap3.com"
 prod_url = ""
 
 url = dev_url
